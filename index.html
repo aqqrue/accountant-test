@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Kind of Accountant Are You? | Aqqrue</title>
+    <meta name="description" content="A 5-minute personality quiz that reveals your accountant archetype. Find out if you're The Guardian, The Decoder, The Architect, or something else entirely.">
+    <meta property="og:title" content="I just found out what kind of accountant I am">
+    <meta property="og:description" content="Take this 2-minute quiz to discover your accountant archetype.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --peach: #F4E0D0;
+            --peach-dark: #E8C4A8;
+            --cream: #FDF8F3;
+            --warm-brown: #8B6F5E;
+            --deep-brown: #5C4033;
+            --sky: #B8D4E3;
+            --sky-light: #D4E8F0;
+            --sage: #A8C0A0;
+            --sage-dark: #7A9E6E;
+            --coral: #E8927C;
+            --gold: #D4A853;
+            --text: #3D2E22;
+            --text-light: #6B5A4E;
+            --card-shadow: 0 8px 32px rgba(92, 64, 51, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Crimson Text', Georgia, serif;
+        }
+
+        /* ============ SCREEN SYSTEM ============ */
+        .screen {
+            min-height: 100dvh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .screen.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .screen.no-center {
+            justify-content: flex-start;
+            min-height: auto;
+            padding-bottom: 4rem;
+        }
+
+        .screen.fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .screen.fade-out {
+            animation: fadeOut 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        /* ============ LANDING SCREEN ============ */
+        #landing {
+            background: linear-gradient(180deg, var(--sky-light) 0%, var(--sky) 40%, var(--peach) 70%, var(--peach-dark) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .landing-scene {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        .landing-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .desk-scene {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .desk {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 80px;
+            background: var(--warm-brown);
+            border-radius: 8px 8px 4px 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .desk::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -4px;
+            right: -4px;
+            height: 8px;
+            background: var(--deep-brown);
+            border-radius: 4px 4px 0 0;
+        }
+
+        .calculator {
+            position: absolute;
+            bottom: 84px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 44px;
+            height: 56px;
+            background: #2C2C2C;
+            border-radius: 6px;
+            padding: 6px;
+        }
+
+        .calc-screen {
+            width: 100%;
+            height: 14px;
+            background: #7BA87C;
+            border-radius: 2px;
+            margin-bottom: 4px;
+        }
+
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .calc-btn {
+            width: 8px;
+            height: 6px;
+            background: #555;
+            border-radius: 1px;
+        }
+
+        .coffee-cup {
+            position: absolute;
+            bottom: 84px;
+            right: 20px;
+            width: 28px;
+            height: 24px;
+            background: #F5F0EA;
+            border-radius: 0 0 10px 10px;
+            border: 2px solid #D4C5B5;
+        }
+
+        .coffee-cup::before {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 4px;
+            width: 10px;
+            height: 12px;
+            border: 2px solid #D4C5B5;
+            border-left: none;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .coffee-steam {
+            position: absolute;
+            bottom: 110px;
+            right: 24px;
+        }
+
+        .steam {
+            width: 2px;
+            height: 16px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 2px;
+            display: inline-block;
+            margin: 0 2px;
+            animation: steam 2s ease-in-out infinite;
+        }
+
+        .steam:nth-child(2) { animation-delay: 0.4s; height: 12px; }
+        .steam:nth-child(3) { animation-delay: 0.8s; height: 14px; }
+
+        @keyframes steam {
+            0%, 100% { transform: translateY(0) scaleX(1); opacity: 0.4; }
+            50% { transform: translateY(-8px) scaleX(1.5); opacity: 0; }
+        }
+
+        .plant-pot {
+            position: absolute;
+            bottom: 84px;
+            left: 16px;
+            width: 22px;
+            height: 18px;
+            background: var(--coral);
+            border-radius: 2px 2px 6px 6px;
+        }
+
+        .plant-leaf {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            width: 14px;
+            height: 14px;
+            background: var(--sage);
+            border-radius: 0 50% 0 50%;
+            transform: rotate(-30deg);
+        }
+
+        .plant-leaf:nth-child(2) {
+            left: 28px;
+            transform: rotate(30deg) scaleX(-1);
+            animation-delay: 0.5s;
+        }
+
+        .floating-numbers {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .float-num {
+            position: absolute;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            color: rgba(139, 111, 94, 0.12);
+            animation: floatNum 15s linear infinite;
+        }
+
+        @keyframes floatNum {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .landing-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: var(--deep-brown);
+            margin-bottom: 0.75rem;
+            line-height: 1.2;
+        }
+
+        .landing-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-start {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--deep-brown);
+            color: var(--cream);
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(92, 64, 51, 0.3);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(92, 64, 51, 0.4);
+            background: #4A3228;
+        }
+
+        .landing-footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            opacity: 0.6;
+        }
+
+        /* ============ INTRO SCREEN ============ */
+        #intro {
+            background: linear-gradient(180deg, var(--sky) 0%, var(--sky-light) 60%, var(--peach) 100%);
+            text-align: center;
+        }
+
+        .intro-content {
+            max-width: 440px;
+        }
+
+        .intro-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--deep-brown);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text em {
+            font-style: italic;
+            color: var(--warm-brown);
+        }
+
+        .intro-note {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .tap-hint {
+            font-size: 0.85rem;
+            color: var(--warm-brown);
+            animation: pulse 2s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .intro-ledger {
+            width: 100px;
+            height: 130px;
+            margin: 0 auto 2rem;
+            background: var(--peach);
+            border-radius: 4px;
+            border: 2px solid var(--peach-dark);
+            position: relative;
+            box-shadow: var(--card-shadow);
+        }
+
+        .ledger-line {
+            width: 60%;
+            height: 2px;
+            background: var(--peach-dark);
+            margin: 10px auto 0;
+            border-radius: 1px;
+            opacity: 0;
+            animation: writeLine 0.5s ease forwards;
+        }
+
+        .ledger-line:nth-child(1) { animation-delay: 0.3s; }
+        .ledger-line:nth-child(2) { animation-delay: 0.6s; width: 45%; }
+        .ledger-line:nth-child(3) { animation-delay: 0.9s; width: 55%; }
+        .ledger-line:nth-child(4) { animation-delay: 1.2s; width: 40%; }
+        .ledger-line:nth-child(5) { animation-delay: 1.5s; width: 50%; }
+
+        @keyframes writeLine {
+            from { opacity: 0; width: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ============ QUESTION SCREEN ============ */
+        #quiz {
+            background: var(--cream);
+            min-height: 100vh;
+            padding: 0;
+        }
+
+        .quiz-container {
+            width: 100%;
+            max-width: 640px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            padding: 1.5rem 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--cream);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-section {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--warm-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-count {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: var(--peach);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sage-dark), var(--coral));
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        .question-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .question-card {
+            display: none;
+            animation: cardIn 0.5s ease forwards;
+        }
+
+        .question-card.active {
+            display: block;
+        }
+
+        .question-card.exit {
+            animation: cardOut 0.3s ease forwards;
+        }
+
+        @keyframes cardIn {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes cardOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-40px); }
+        }
+
+        .question-context {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--warm-brown);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--deep-brown);
+            margin-bottom: 1.75rem;
+            line-height: 1.4;
+        }
+
+        .question-scenario {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background: var(--peach);
+            border-radius: 12px;
+            border-left: 3px solid var(--coral);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option {
+            padding: 1.1rem 1.25rem;
+            background: white;
+            border: 2px solid var(--peach);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option:hover {
+            border-color: var(--warm-brown);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(92, 64, 51, 0.1);
+        }
+
+        .option.selected {
+            border-color: var(--sage-dark);
+            background: linear-gradient(135deg, #f0f7ee, #e8f2e5);
+            box-shadow: 0 2px 8px rgba(122, 158, 110, 0.2);
+        }
+
+        .option.selected::before {
+            content: '✓';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--sage-dark);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: var(--warm-brown);
+            margin-right: 0.5rem;
+        }
+
+        /* Open prompt */
+        .open-prompt-area {
+            width: 100%;
+        }
+
+        .open-prompt-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1.25rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+            background: white;
+            border: 2px solid var(--peach);
+            border-radius: 12px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .open-prompt-textarea:focus {
+            outline: none;
+            border-color: var(--warm-brown);
+            box-shadow: 0 0 0 3px rgba(139, 111, 94, 0.1);
+        }
+
+        .open-prompt-textarea::placeholder {
+            color: var(--peach-dark);
+        }
+
+        .btn-next {
+            margin-top: 1.5rem;
+            padding: 0.85rem 2.5rem;
+            background: var(--deep-brown);
+            color: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-end;
+            display: none;
+        }
+
+        .btn-next.visible {
+            display: inline-block;
+        }
+
+        .btn-next:hover {
+            background: #4A3228;
+            transform: translateY(-1px);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ============ LOADING / REVEAL SCREEN ============ */
+        #loading {
+            background: linear-gradient(180deg, var(--cream) 0%, var(--peach) 100%);
+            text-align: center;
+        }
+
+        .loading-content {
+            max-width: 400px;
+        }
+
+        .loading-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            color: var(--deep-brown);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .loading-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--warm-brown);
+            border-radius: 50%;
+            animation: dotBounce 1.4s ease-in-out infinite;
+        }
+
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotBounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .loading-messages {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+            min-height: 1.5em;
+        }
+
+        /* ============ RESULT SCREEN ============ */
+        #result {
+            background: var(--cream);
+            padding-top: 3rem;
+        }
+
+        .result-card-wrapper {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .result-card {
+            background: linear-gradient(160deg, var(--peach), var(--peach-dark));
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .result-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--warm-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-name-line {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            color: var(--deep-brown);
+            margin-bottom: 1.5rem;
+        }
+
+        .result-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-archetype {
+            font-family: 'Crimson Text', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .result-tagline {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--warm-brown);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .result-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--warm-brown);
+            margin: 0 auto 1.5rem;
+            opacity: 0.4;
+        }
+
+        .result-description {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--deep-brown);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .result-traits {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .trait {
+            text-align: center;
+        }
+
+        .trait-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .trait-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--warm-brown);
+            font-weight: 500;
+        }
+
+        .trait-value {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.85rem;
+            color: var(--deep-brown);
+            font-weight: 600;
+        }
+
+        .result-branding {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(139, 111, 94, 0.2);
+            font-size: 0.75rem;
+            color: var(--warm-brown);
+            opacity: 0.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Share section below card */
+        .share-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .share-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.2rem;
+            color: var(--deep-brown);
+            margin-bottom: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-share {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--peach-dark);
+            background: white;
+            color: var(--deep-brown);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-share:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 64, 51, 0.15);
+        }
+
+        .btn-share.primary {
+            background: var(--deep-brown);
+            color: var(--cream);
+            border-color: var(--deep-brown);
+        }
+
+        .btn-share.primary:hover {
+            background: #4A3228;
+        }
+
+        .btn-retake {
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .btn-retake:hover {
+            color: var(--deep-brown);
+        }
+
+        .share-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--deep-brown);
+            color: var(--cream);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .share-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Section transition */
+        .section-intro {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .section-intro-number {
+            font-family: 'Crimson Text', serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--warm-brown);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-intro-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.6rem;
+            color: var(--deep-brown);
+            margin-bottom: 1rem;
+        }
+
+        .section-intro-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 600px) {
+            .landing-title {
+                font-size: 1.9rem;
+            }
+
+            .landing-subtitle {
+                font-size: 1rem;
+            }
+
+            .question-text {
+                font-size: 1.2rem;
+            }
+
+            .option {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .result-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .result-archetype {
+                font-size: 1.7rem;
+            }
+
+            .result-traits {
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .screen {
+                padding: 3rem;
+            }
+
+            .landing-title {
+                font-size: 2.8rem;
+            }
+
+            .question-area {
+                padding: 2rem 3rem;
+            }
+
+            .option {
+                padding: 1.25rem 1.5rem;
+            }
+        }
+
+        /* Canvas for screenshot */
+        #screenshot-canvas {
+            position: fixed;
+            left: -9999px;
+            top: -9999px;
+        }
+
+        /* Music toggle */
+        .music-toggle {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(139, 111, 94, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.3s ease;
+            color: var(--warm-brown);
+            font-size: 1.1rem;
+        }
+
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .music-toggle.muted {
+            opacity: 0.5;
+        }
+
+        .music-toggle .bar {
+            display: inline-block;
+            width: 3px;
+            background: var(--warm-brown);
+            border-radius: 2px;
+            margin: 0 1px;
+            animation: soundBar 1s ease-in-out infinite;
+        }
+
+        .music-toggle .bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .music-toggle .bar:nth-child(2) { height: 14px; animation-delay: 0.15s; }
+        .music-toggle .bar:nth-child(3) { height: 10px; animation-delay: 0.3s; }
+        .music-toggle .bar:nth-child(4) { height: 16px; animation-delay: 0.45s; }
+
+        .music-toggle.muted .bar {
+            animation: none;
+            height: 3px !important;
+        }
+
+        @keyframes soundBar {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.4); }
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
+            display: none;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            opacity: 0.5;
+            margin-top: 0.75rem;
+            text-align: center;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .keyboard-hint {
+                display: block;
+            }
+        }
+
+        /* Focus styles for keyboard nav */
+        .option:focus {
+            outline: none;
+            border-color: var(--warm-brown);
+            box-shadow: 0 0 0 3px rgba(139, 111, 94, 0.2);
+        }
+
+        .option.focused {
+            border-color: var(--warm-brown);
+            box-shadow: 0 0 0 3px rgba(139, 111, 94, 0.15);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MUSIC - Satie Gymnopedie No. 1 (public domain, from Internet Archive) -->
+    <audio id="bgMusic" loop preload="none">
+        <source src="music.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/Serenity_Classical_Piano_CD/04%20-%20Gymnop%C3%A9die%20No%201.mp3" type="audio/mpeg">
+    </audio>
+
+    <button class="music-toggle muted" id="musicToggle" onclick="toggleMusic()" title="Toggle music">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+
+    <!-- FLOATING NUMBERS BACKGROUND -->
+    <div class="floating-numbers" id="floatingNums"></div>
+
+    <!-- ============ LANDING ============ -->
+    <div class="screen active fade-in" id="landing">
+        <div class="landing-scene">
+            <div class="landing-illustration">
+                <div class="desk-scene">
+                    <div class="plant-leaf"></div>
+                    <div class="plant-leaf" style="left: 28px; transform: rotate(30deg) scaleX(-1);"></div>
+                    <div class="plant-pot"></div>
+                    <div class="calculator">
+                        <div class="calc-screen"></div>
+                        <div class="calc-buttons">
+                            <div class="calc-btn"></div><div class="calc-btn"></div><div class="calc-btn"></div>
+                            <div class="calc-btn"></div><div class="calc-btn"></div><div class="calc-btn"></div>
+                            <div class="calc-btn"></div><div class="calc-btn"></div><div class="calc-btn"></div>
+                        </div>
+                    </div>
+                    <div class="coffee-steam">
+                        <div class="steam"></div>
+                        <div class="steam"></div>
+                        <div class="steam"></div>
+                    </div>
+                    <div class="coffee-cup"></div>
+                    <div class="desk"></div>
+                </div>
+            </div>
+            <h1 class="landing-title">What Kind of Accountant Are You?</h1>
+            <p class="landing-subtitle">A 2-minute quiz to discover what actually drives you - beyond the spreadsheets.</p>
+            <button class="btn-start" onclick="startQuiz()">Let's Find Out</button>
+            <p class="landing-footer">Takes about 2 minutes &middot; No sign-up required</p>
+        </div>
+    </div>
+
+    <!-- ============ INTRO ============ -->
+    <div class="screen" id="intro">
+        <div class="intro-content">
+            <div class="intro-ledger">
+                <div class="ledger-line"></div>
+                <div class="ledger-line"></div>
+                <div class="ledger-line"></div>
+                <div class="ledger-line"></div>
+                <div class="ledger-line"></div>
+            </div>
+            <p class="intro-text">
+                Here's the thing about accountants:<br><br>
+                Everyone thinks they know what you do.<br>
+                <em>"Oh, taxes. Numbers. Got it."</em><br><br>
+                But the way you actually think about your work?<br>
+                The reason you stay up at 11pm checking that one return?<br><br>
+                That's the part nobody asks about.
+            </p>
+            <p class="intro-text" style="margin-top: 1rem;">
+                <strong>Until now.</strong>
+            </p>
+            <p class="intro-note">(There are no wrong answers. Go with your gut, not the "professional" answer.)</p>
+            <p class="tap-hint" onclick="goToQuiz()">Tap to begin &rarr;</p>
+        </div>
+    </div>
+
+    <!-- ============ QUIZ ============ -->
+    <div class="screen" id="quiz">
+        <div class="quiz-container">
+            <div class="progress-bar-container">
+                <div class="progress-info">
+                    <span class="progress-section" id="sectionLabel">Part 1 of 3</span>
+                    <span class="progress-count" id="progressCount">1 / 20</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" style="width: 5%"></div>
+                </div>
+            </div>
+            <div class="question-area" id="questionArea">
+                <!-- Questions injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ LOADING ============ -->
+    <div class="screen" id="loading">
+        <div class="loading-content">
+            <div class="loading-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <p class="loading-text">Crunching the numbers on your personality...</p>
+            <p class="loading-messages" id="loadingMsg"></p>
+        </div>
+    </div>
+
+    <!-- ============ RESULT ============ -->
+    <div class="screen no-center" id="result">
+        <div class="result-card-wrapper">
+            <div class="result-card" id="resultCard">
+                <div class="result-label">Your Accountant Archetype</div>
+                <div class="result-name-line" id="resultNameLine"></div>
+                <div class="result-icon" id="resultIcon"></div>
+                <h2 class="result-archetype" id="resultArchetype"></h2>
+                <p class="result-tagline" id="resultTagline"></p>
+                <div class="result-divider"></div>
+                <p class="result-description" id="resultDescription"></p>
+                <div class="result-traits" id="resultTraits"></div>
+                <div class="result-branding">aqqrue.com &middot; What Kind of Accountant Are You?</div>
+            </div>
+
+            <div class="share-section">
+                <p class="share-title">Think your accountant friends can guess theirs?</p>
+                <div class="share-buttons">
+                    <button class="btn-share primary" onclick="shareResult()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                        Share Result
+                    </button>
+                    <button class="btn-share" onclick="copyLink()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy Link
+                    </button>
+                    <button class="btn-share" onclick="downloadCard()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Save Image
+                    </button>
+                </div>
+                <button class="btn-retake" onclick="retakeQuiz()">Take it again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="share-toast" id="toast"></div>
+
+    <!--
+    ============================================================
+    GOOGLE SHEETS SETUP (2 minutes)
+    ============================================================
+    1. Go to https://sheets.new - create a new Google Sheet
+    2. Name the first sheet "Responses"
+    3. Add these headers in Row 1:
+       A: sessionId | B: timestamp | C: ip | D: country | E: city
+       F: userAgent | G: questionIndex | H: questionText
+       I: selectedOption | J: archetype | K: finalResult
+       L: completionStatus | M: scoreBreakdown
+
+    4. Go to Extensions > Apps Script
+    5. Replace the code with:
+
+       function doPost(e) {
+         var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Responses");
+         var data = JSON.parse(e.postData.contents);
+         sheet.appendRow([
+           data.sessionId, data.timestamp, data.ip, data.country,
+           data.city, data.userAgent, data.questionIndex,
+           data.questionText, data.selectedOption, data.archetype,
+           data.finalResult, data.completionStatus, data.scoreBreakdown
+         ]);
+         return ContentService.createTextOutput("OK");
+       }
+
+    6. Click Deploy > New Deployment
+    7. Type: Web app | Execute as: Me | Who has access: Anyone
+    8. Copy the URL and paste it below as SHEET_WEBHOOK_URL
+    ============================================================
+    -->
+
+    <script>
+    // ============ CONFIG ============
+    // Paste your Google Apps Script Web App URL here:
+    const SHEET_WEBHOOK_URL = 'https://script.google.com/a/macros/aqqrue.ai/s/AKfycbxhhTEe2vdwdhzArxSbighozIAsmyOugVbtUcFTBXi3R8rXPDrLkm7tZZeY4UqPQVST/exec';
+
+    // ============ LOGGING ============
+    const sessionId = crypto.randomUUID ? crypto.randomUUID() : 'sess-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
+    let geoData = { ip: '', country: '', city: '' };
+
+    // Fetch IP + geolocation once on load
+    (async function fetchGeo() {
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            if (res.ok) {
+                const data = await res.json();
+                geoData = { ip: data.ip || '', country: data.country_name || '', city: data.city || '' };
+            }
+        } catch (e) { /* silent fail - geo is nice-to-have */ }
+    })();
+
+    function logToSheet(payload) {
+        if (!SHEET_WEBHOOK_URL) return; // skip if not configured
+        const row = {
+            sessionId,
+            timestamp: new Date().toISOString(),
+            ip: geoData.ip,
+            country: geoData.country,
+            city: geoData.city,
+            userAgent: navigator.userAgent,
+            questionIndex: '',
+            questionText: '',
+            selectedOption: '',
+            archetype: '',
+            finalResult: '',
+            completionStatus: 'partial',
+            scoreBreakdown: '',
+            ...payload
+        };
+        // Fire-and-forget - don't block the quiz
+        fetch(SHEET_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(row)
+        }).catch(() => {});
+    }
+
+    // ============ DATA ============
+    const questions = [
+        // SECTION 1: Forced Choices (0-9)
+        {
+            section: 1,
+            text: "It's been a long week. You're venting to a friend. Which sounds more like you?",
+            options: [
+                { label: "A", text: "\"I just need better systems and this would all be manageable.\"", archetype: "Order Bringer" },
+                { label: "B", text: "\"I just wish people understood what I carry for them.\"", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 1,
+            text: "When you think about the best part of your job, what wins?",
+            options: [
+                { label: "A", text: "When the numbers are exactly right. Chef's kiss.", archetype: "Craft Lover" },
+                { label: "B", text: "When a client actually listens to my advice.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 1,
+            text: "If you could design your ideal practice, which sounds better?",
+            options: [
+                { label: "A", text: "Runs like a machine - clean, predictable, no surprises.", archetype: "Order Bringer" },
+                { label: "B", text: "Fewer things, but each one genuinely matters.", archetype: "Purpose Seeker" }
+            ]
+        },
+        {
+            section: 1,
+            text: "What frustrates you more?",
+            options: [
+                { label: "A", text: "When things are disorganized. Pure chaos.", archetype: "Order Bringer" },
+                { label: "B", text: "When I know something important but don't have time to act on it.", archetype: "Truth Seeker" }
+            ]
+        },
+        {
+            section: 1,
+            text: "How do you know you had a good month?",
+            options: [
+                { label: "A", text: "By how much I got done. Productivity = sanity.", archetype: "Pragmatist" },
+                { label: "B", text: "By whether my clients are actually in good shape.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 1,
+            text: "Be honest - why did you choose this profession?",
+            options: [
+                { label: "A", text: "It's stable and makes sense. Practical choice.", archetype: "Pragmatist" },
+                { label: "B", text: "Someone has to get the numbers right. Might as well be me.", archetype: "Truth Seeker" }
+            ]
+        },
+        {
+            section: 1,
+            text: "You magically get 20 extra hours a month. What do you do?",
+            options: [
+                { label: "A", text: "Take on more clients. Scale up.", archetype: "Pragmatist" },
+                { label: "B", text: "Go deeper with the clients I already have.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 1,
+            text: "What are you most proud of in your work?",
+            options: [
+                { label: "A", text: "How efficiently I run things.", archetype: "Pragmatist" },
+                { label: "B", text: "How much my clients trust me.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 1,
+            text: "What's the worst feeling in your work?",
+            options: [
+                { label: "A", text: "Falling behind. The pile growing faster than I can clear it.", archetype: "Order Bringer" },
+                { label: "B", text: "Knowing I could have caught something but didn't have time to look.", archetype: "Truth Seeker" }
+            ]
+        },
+        {
+            section: 1,
+            text: "What do you want from the tools you use?",
+            options: [
+                { label: "A", text: "Help me do more, faster. Speed is everything.", archetype: "Pragmatist" },
+                { label: "B", text: "Handle the stuff that's beneath my expertise so I can do real work.", archetype: "Custodian" }
+            ]
+        },
+        // SECTION 2: Scenario Reactions (10-16)
+        {
+            section: 2,
+            context: "Picture this...",
+            scenario: "A client calls in a panic - books are a mess, loan deadline Friday. You drop everything and work the whole weekend to fix it. Monday morning, they don't mention it. How do you feel?",
+            text: "Your gut reaction?",
+            options: [
+                { label: "A", text: "Frustrated. My time has value and they should acknowledge that.", archetype: "Pragmatist" },
+                { label: "B", text: "Fine, honestly. That's the job. I didn't do it for thanks.", archetype: "Pragmatist" },
+                { label: "C", text: "Annoyed - but mostly at myself for not having a system that prevents this.", archetype: "Order Bringer" },
+                { label: "D", text: "A quiet kind of tired. Not angry. Just... unseen.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 2,
+            context: "You're reviewing a new client's files...",
+            scenario: "You discover a significant tax exposure that their previous accountant missed entirely. What's your first instinct?",
+            text: "What do you do first?",
+            options: [
+                { label: "A", text: "Fix it. Efficiently. Minimize the damage and move on.", archetype: "Pragmatist" },
+                { label: "B", text: "Document exactly what went wrong. Make it airtight.", archetype: "Order Bringer" },
+                { label: "C", text: "Sit the client down. They need to understand what this means.", archetype: "Truth Seeker" },
+                { label: "D", text: "Feel a sense of weight. This is why I do this. This is what I protect them from.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 2,
+            scenario: "A shiny new AI tool launches and promises to \"replace the need for accountants.\" Your reaction?",
+            text: "Honestly, what do you think?",
+            options: [
+                { label: "A", text: "Good luck with that. I'll believe it when I see it.", archetype: "Pragmatist" },
+                { label: "B", text: "They don't understand what we actually do.", archetype: "Custodian" },
+                { label: "C", text: "It might handle the basic stuff. I'm more worried about the judgment calls.", archetype: "Truth Seeker" },
+                { label: "D", text: "It bothers me more than it should. Not because I'm scared - because it reduces what I do to something mechanical.", archetype: "Purpose Seeker" }
+            ]
+        },
+        {
+            section: 2,
+            scenario: "Dinner party. Someone asks what you do. You say \"accountant.\" They visibly lose interest or crack a boring joke.",
+            text: "How does that land?",
+            options: [
+                { label: "A", text: "Laugh it off. I don't need their validation.", archetype: "Pragmatist" },
+                { label: "B", text: "Mildly annoying, but I'm used to it by now.", archetype: "Pragmatist" },
+                { label: "C", text: "I usually just change the subject. Not worth explaining.", archetype: "Order Bringer" },
+                { label: "D", text: "There's a small sting. Not because I need them impressed - because they have no idea what I actually carry.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 2,
+            text: "Think of your best client relationship. The one you're most proud of. What makes it special?",
+            options: [
+                { label: "A", text: "I've helped them save real money and grow their business.", archetype: "Pragmatist" },
+                { label: "B", text: "Their books are always clean. The system just works.", archetype: "Order Bringer" },
+                { label: "C", text: "They trust me with everything. I know their business inside and out.", archetype: "Custodian" },
+                { label: "D", text: "I've caught things that would have hurt them. They may not even know about half of them.", archetype: "Custodian" }
+            ]
+        },
+        {
+            section: 2,
+            scenario: "It's 11pm during busy season. You're reviewing a return and something doesn't look right. It's probably fine. You could file it and circle back later.",
+            text: "What do you actually do?",
+            options: [
+                { label: "A", text: "Flag it, note it, file it, circle back tomorrow. Efficiency matters.", archetype: "Pragmatist" },
+                { label: "B", text: "Stay up. I can't submit something I'm not sure about.", archetype: "Craft Lover" },
+                { label: "C", text: "Stay up. Because if I'm wrong, my client pays the price.", archetype: "Custodian" },
+                { label: "D", text: "Stay up. Not because anyone would know. Because I would know.", archetype: "Truth Seeker" }
+            ]
+        },
+        {
+            section: 2,
+            text: "If you could change one thing about how the world sees accountants, what would it be?",
+            options: [
+                { label: "A", text: "That we're a cost center. We create real value.", archetype: "Pragmatist" },
+                { label: "B", text: "That we're just \"numbers people.\" We understand business better than most.", archetype: "Truth Seeker" },
+                { label: "C", text: "That we're interchangeable. The trust I've built took years.", archetype: "Custodian" },
+                { label: "D", text: "That we're boring. We hold the financial truth of every business we touch.", archetype: "Purpose Seeker" }
+            ]
+        },
+        // SECTION 3: Open Prompts (17-19)
+        {
+            section: 3,
+            text: "Complete this sentence:",
+            context: "\"People don't realize that being an accountant means...\"",
+            type: "open",
+            placeholder: "Say whatever comes to mind..."
+        },
+        {
+            section: 3,
+            text: "When do you feel most like yourself at work?",
+            context: "That version of you that's doing exactly what you were meant to do.",
+            type: "open",
+            placeholder: "Describe that moment..."
+        },
+        {
+            section: 3,
+            text: "If you could go back and talk to yourself on the day you decided to become an accountant, what would you say?",
+            context: "No filter. Just you talking to younger you.",
+            type: "open",
+            placeholder: "What would you tell them..."
+        }
+    ];
+
+    const archetypeData = {
+        "Custodian": {
+            name: "The Guardian",
+            icon: "🛡️",
+            tagline: "\"You hold the line so others don't have to.\"",
+            color: "#7BA87C",
+            bg: "linear-gradient(160deg, #E8F2E5, #D0E4CC)",
+            description: "You carry more than numbers - you carry people's trust, their livelihoods, their peace of mind. You're the accountant who stays up late not for the billable hour, but because someone is counting on you. Most of them will never know the half of what you've caught.",
+            superpower: "Trust",
+            kryptonite: "Invisibility",
+            motto: "\"If not me, then who?\"",
+            studyBuddy: "The Decoder",
+            focusSpot: "A quiet corner with a client's full file",
+            shareText: "So I took this quiz and apparently I'm The Guardian \u2014 the accountant who quietly carries everyone's financial safety and somehow never gets a thank-you for it.\n\nMy superpower is trust. My kryptonite? Being completely invisible while doing it. Painfully accurate.\n\nThere are 6 accountant archetypes. I bet you can't guess yours:"
+        },
+        "Truth Seeker": {
+            name: "The Decoder",
+            icon: "🔍",
+            tagline: "\"The numbers tell a story. You make sure it's the true one.\"",
+            color: "#5B8AA0",
+            bg: "linear-gradient(160deg, #E0EEF4, #C8DEE9)",
+            description: "You're not satisfied with \"close enough.\" You dig until the numbers make sense - not just mathematically, but in terms of what they mean for the business. You see patterns others miss and risks others haven't imagined yet.",
+            superpower: "Insight",
+            kryptonite: "Not enough hours",
+            motto: "\"The answer is in the data.\"",
+            studyBuddy: "The Artisan",
+            focusSpot: "Deep in a complex reconciliation",
+            shareText: "Apparently I'm The Decoder \u2014 the accountant who won't stop digging until the numbers tell the real story. Not the convenient one. The true one.\n\nMy kryptonite is literally \"not enough hours.\" If that isn't the most accountant thing you've ever heard.\n\nThere are 6 types. Which one are you?"
+        },
+        "Order Bringer": {
+            name: "The Architect",
+            icon: "📐",
+            tagline: "\"Chaos is a choice. You choose otherwise.\"",
+            color: "#C4956A",
+            bg: "linear-gradient(160deg, #F5E8DC, #EBDACC)",
+            description: "You believe every problem is a systems problem in disguise. Clean processes, clear workflows, no surprises - that's your craft. When everything runs smoothly, people think it's easy. Only you know how much design it took.",
+            superpower: "Structure",
+            kryptonite: "Other people's chaos",
+            motto: "\"A place for everything.\"",
+            studyBuddy: "The Engine",
+            focusSpot: "A perfectly organized workspace",
+            shareText: "Just found out I'm The Architect \u2014 the accountant who genuinely believes chaos is a personal choice and clean workflows are an art form.\n\nMy kryptonite? Other people's chaos. (Yes, I'm looking at you and your shoebox of receipts.)\n\n6 accountant archetypes exist. I dare you to take this and not feel seen:"
+        },
+        "Pragmatist": {
+            name: "The Engine",
+            icon: "⚡",
+            tagline: "\"Get it done. Get it done right. Move on.\"",
+            color: "#D4A853",
+            bg: "linear-gradient(160deg, #FBF0DB, #F2E3C3)",
+            description: "You're the accountant who gets things done. Efficiency isn't just a nice-to-have - it's how you create value. You measure in output, you think in systems, and you know that time is the most expensive thing your clients pay for.",
+            superpower: "Efficiency",
+            kryptonite: "Slow processes",
+            motto: "\"Time is money. Literally.\"",
+            studyBuddy: "The Architect",
+            focusSpot: "Dual monitors, zero distractions",
+            shareText: "I'm The Engine \u2014 the accountant who considers slow processes a personal offense and measures a good month by how much got done.\n\nMy inner motto is literally \"Time is money. Literally.\" I've never felt so called out by a quiz.\n\nThere are 6 accountant archetypes and this thing is weirdly accurate:"
+        },
+        "Purpose Seeker": {
+            name: "The Compass",
+            icon: "🧭",
+            tagline: "\"There has to be more to this than filing returns.\"",
+            color: "#9B7BB5",
+            bg: "linear-gradient(160deg, #EDE4F3, #DED2EB)",
+            description: "You got into this profession because it meant something. And part of you still holds onto that - the idea that accounting isn't just a service, it's stewardship. You're looking for the version of this work that feels like it matters.",
+            superpower: "Meaning",
+            kryptonite: "Routine without purpose",
+            motto: "\"This should matter more.\"",
+            studyBuddy: "The Guardian",
+            focusSpot: "Advising a business that genuinely needs you",
+            shareText: "Turns out I'm The Compass \u2014 the accountant who got into this because it meant something and still hasn't let go of that feeling.\n\nMy kryptonite is \"routine without purpose\" and honestly, that hit different during busy season.\n\n6 accountant archetypes. This quiz knows things it shouldn't:"
+        },
+        "Craft Lover": {
+            name: "The Artisan",
+            icon: "✨",
+            tagline: "\"There's an elegance to getting it exactly right.\"",
+            color: "#C47A7A",
+            bg: "linear-gradient(160deg, #F5E0E0, #EBCECE)",
+            description: "For you, accounting isn't just work - it's craft. A perfectly balanced sheet, an elegant tax strategy, a clean close - these things satisfy you on a level most people wouldn't understand. You take pride in precision, not because you have to, but because you can't help it.",
+            superpower: "Precision",
+            kryptonite: "\"Good enough\"",
+            motto: "\"If it's worth doing, it's worth doing right.\"",
+            studyBuddy: "The Decoder",
+            focusSpot: "A complex problem with an elegant solution",
+            shareText: "I'm The Artisan \u2014 the accountant who finds a perfectly balanced sheet genuinely beautiful and considers \"good enough\" a four-letter word.\n\nApparently my superpower is precision and my kryptonite is people who round. You know who you are.\n\n6 accountant archetypes. Find yours (if you dare):"
+        }
+    };
+
+    // ============ STATE ============
+    let currentQuestion = 0;
+    let answers = {};
+    let userName = '';
+
+    // ============ NAVIGATION ============
+    function showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => {
+            s.classList.remove('active', 'fade-in');
+        });
+        const screen = document.getElementById(id);
+        screen.classList.add('active');
+        requestAnimationFrame(() => {
+            screen.classList.add('fade-in');
+        });
+        window.scrollTo(0, 0);
+    }
+
+    function startQuiz() {
+        showScreen('intro');
+        startMusic();
+    }
+
+    function goToQuiz() {
+        showScreen('quiz');
+        renderQuestion(0);
+    }
+
+    function retakeQuiz() {
+        currentQuestion = 0;
+        answers = {};
+        showScreen('landing');
+    }
+
+    // ============ RENDER QUESTION ============
+    function renderQuestion(index) {
+        const area = document.getElementById('questionArea');
+        const q = questions[index];
+        currentQuestion = index;
+
+        // Update progress
+        const total = questions.length;
+        document.getElementById('progressFill').style.width = ((index + 1) / total * 100) + '%';
+        document.getElementById('progressCount').textContent = `${index + 1} / ${total}`;
+
+        if (q.section === 1) {
+            document.getElementById('sectionLabel').textContent = 'Part 1: Quick Picks';
+        } else if (q.section === 2) {
+            document.getElementById('sectionLabel').textContent = 'Part 2: Scenarios';
+        } else {
+            document.getElementById('sectionLabel').textContent = 'Part 3: In Your Words';
+        }
+
+        let html = `<div class="question-card active" id="qcard-${index}">`;
+
+        if (q.context) {
+            html += `<p class="question-context">${q.context}</p>`;
+        }
+
+        if (q.scenario) {
+            html += `<div class="question-scenario">${q.scenario}</div>`;
+        }
+
+        html += `<h2 class="question-text">${q.text}</h2>`;
+
+        if (q.type === 'open') {
+            html += `<div class="open-prompt-area">
+                <textarea class="open-prompt-textarea" id="openAnswer-${index}"
+                    placeholder="${q.placeholder || 'Type your answer...'}"
+                    oninput="handleOpenInput(${index})">${answers[index]?.text || ''}</textarea>
+            </div>`;
+            html += `<button class="btn-next ${answers[index]?.text ? 'visible' : ''}" id="btnNext-${index}" onclick="nextQuestion()">${index === total - 1 ? 'See My Results' : 'Next'} &rarr;</button>`;
+        } else {
+            html += `<div class="options">`;
+            q.options.forEach((opt, i) => {
+                const selected = answers[index]?.choice === i ? 'selected' : '';
+                html += `<div class="option ${selected}" onclick="selectOption(${index}, ${i})">
+                    <span class="option-label">${opt.label}.</span> ${opt.text}
+                </div>`;
+            });
+            html += `</div>`;
+            html += `<p class="keyboard-hint">Press A/B or 1/2 to pick &middot; Arrow keys to browse</p>`;
+        }
+
+        html += `</div>`;
+        area.innerHTML = html;
+
+        // Focus textarea on open prompts
+        if (q.type === 'open') {
+            setTimeout(() => {
+                const ta = document.getElementById(`openAnswer-${index}`);
+                if (ta) ta.focus();
+            }, 300);
+        }
+    }
+
+    function selectOption(qIndex, optIndex) {
+        const q = questions[qIndex];
+        answers[qIndex] = {
+            choice: optIndex,
+            archetype: q.options[optIndex].archetype
+        };
+
+        // Log this answer
+        logToSheet({
+            questionIndex: qIndex + 1,
+            questionText: q.text,
+            selectedOption: q.options[optIndex].label + ': ' + q.options[optIndex].text.replace(/"/g, '"'),
+            archetype: q.options[optIndex].archetype
+        });
+
+        // Visual feedback
+        document.querySelectorAll(`#qcard-${qIndex} .option`).forEach((el, i) => {
+            el.classList.toggle('selected', i === optIndex);
+        });
+
+        // Auto-advance after brief delay
+        setTimeout(() => {
+            nextQuestion();
+        }, 400);
+    }
+
+    function handleOpenInput(qIndex) {
+        const ta = document.getElementById(`openAnswer-${qIndex}`);
+        const btn = document.getElementById(`btnNext-${qIndex}`);
+        answers[qIndex] = { text: ta.value };
+        if (ta.value.trim().length > 0) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }
+
+    function nextQuestion() {
+        // Log open prompt answers when advancing
+        const q = questions[currentQuestion];
+        if (q.type === 'open' && answers[currentQuestion]?.text) {
+            logToSheet({
+                questionIndex: currentQuestion + 1,
+                questionText: q.text,
+                selectedOption: answers[currentQuestion].text
+            });
+        }
+
+        if (currentQuestion < questions.length - 1) {
+            const card = document.querySelector('.question-card.active');
+            if (card) {
+                card.classList.add('exit');
+                setTimeout(() => {
+                    renderQuestion(currentQuestion + 1);
+                }, 300);
+            }
+        } else {
+            showLoading();
+        }
+    }
+
+    // ============ LOADING ============
+    function showLoading() {
+        showScreen('loading');
+
+        const messages = [
+            "Analyzing your responses...",
+            "Cross-referencing with 6 accountant archetypes...",
+            "Consulting the ledger of souls...",
+            "Almost there...",
+        ];
+
+        let msgIndex = 0;
+        const msgEl = document.getElementById('loadingMsg');
+        msgEl.textContent = messages[0];
+
+        const interval = setInterval(() => {
+            msgIndex++;
+            if (msgIndex < messages.length) {
+                msgEl.textContent = messages[msgIndex];
+            }
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            calculateResult();
+        }, 4000);
+    }
+
+    // ============ SCORING ============
+    function calculateResult() {
+        const scores = {
+            "Custodian": 0,
+            "Truth Seeker": 0,
+            "Order Bringer": 0,
+            "Pragmatist": 0,
+            "Purpose Seeker": 0,
+            "Craft Lover": 0
+        };
+
+        // Score multiple-choice questions
+        for (let i = 0; i < 17; i++) {
+            if (answers[i] && answers[i].archetype) {
+                scores[answers[i].archetype] += 1;
+            }
+        }
+
+        // Analyze open prompts for keywords
+        for (let i = 17; i < 20; i++) {
+            if (answers[i] && answers[i].text) {
+                const text = answers[i].text.toLowerCase();
+
+                // Custodian signals
+                if (/responsib|carry|trust|depend|protect|weight|care|family|lives/.test(text)) scores["Custodian"] += 1.5;
+                // Truth Seeker signals
+                if (/truth|understand|insight|know|learn|discover|pattern|analy/.test(text)) scores["Truth Seeker"] += 1.5;
+                // Order Bringer signals
+                if (/system|organiz|process|clean|order|structur|efficient|smooth/.test(text)) scores["Order Bringer"] += 1.5;
+                // Pragmatist signals
+                if (/money|time|value|product|scale|grow|business|charge|worth/.test(text)) scores["Pragmatist"] += 1.5;
+                // Purpose Seeker signals
+                if (/meaning|purpose|matter|more than|bigger|impact|difference|why/.test(text)) scores["Purpose Seeker"] += 1.5;
+                // Craft Lover signals
+                if (/right|perfect|precise|exact|elegant|craft|pride|quality|skill/.test(text)) scores["Craft Lover"] += 1.5;
+            }
+        }
+
+        // Find the winner
+        let maxScore = 0;
+        let winner = "Custodian";
+        for (const [archetype, score] of Object.entries(scores)) {
+            if (score > maxScore) {
+                maxScore = score;
+                winner = archetype;
+            }
+        }
+
+        // Log final result
+        logToSheet({
+            finalResult: archetypeData[winner].name + ' (' + winner + ')',
+            completionStatus: 'complete',
+            scoreBreakdown: Object.entries(scores).map(([k, v]) => k + ':' + v).join(' | ')
+        });
+
+        showResult(winner, scores);
+    }
+
+    // ============ RESULT ============
+    function showResult(archetype, scores) {
+        const data = archetypeData[archetype];
+
+        // Apply archetype-specific gradient to card
+        document.getElementById('resultCard').style.background = data.bg;
+        document.getElementById('resultNameLine').textContent = '';
+        document.getElementById('resultIcon').innerHTML = `<span>${data.icon}</span>`;
+        document.getElementById('resultIcon').style.background = `${data.color}22`;
+        document.getElementById('resultArchetype').textContent = data.name;
+        document.getElementById('resultTagline').textContent = data.tagline;
+        document.getElementById('resultDescription').textContent = data.description;
+
+        // Traits
+        document.getElementById('resultTraits').innerHTML = `
+            <div class="trait">
+                <div class="trait-icon">💪</div>
+                <div class="trait-label">Superpower</div>
+                <div class="trait-value">${data.superpower}</div>
+            </div>
+            <div class="trait">
+                <div class="trait-icon">🎯</div>
+                <div class="trait-label">Kryptonite</div>
+                <div class="trait-value">${data.kryptonite}</div>
+            </div>
+            <div class="trait">
+                <div class="trait-icon">💬</div>
+                <div class="trait-label">Inner Motto</div>
+                <div class="trait-value">${data.motto}</div>
+            </div>
+        `;
+
+        // Store result for sharing
+        window.quizResult = { archetype, data, scores };
+
+        showScreen('result');
+    }
+
+    // ============ SHARING ============
+    function shareResult() {
+        const data = window.quizResult.data;
+        const url = window.location.href.split('?')[0];
+
+        if (navigator.share) {
+            navigator.share({
+                title: `I'm ${data.name}!`,
+                text: data.shareText,
+                url: url
+            }).catch(() => {});
+        } else {
+            copyToClipboard(data.shareText + '\n\n' + url);
+            showToast('Copied to clipboard!');
+        }
+    }
+
+    function copyLink() {
+        const data = window.quizResult.data;
+        const url = window.location.href.split('?')[0];
+        copyToClipboard(data.shareText + '\n\n' + url);
+        showToast('Copied to clipboard!');
+    }
+
+    function downloadCard() {
+        // Use html2canvas if available, otherwise fallback to basic approach
+        const card = document.getElementById('resultCard');
+
+        // Try to create a canvas screenshot
+        if (typeof html2canvas !== 'undefined') {
+            html2canvas(card, {
+                scale: 2,
+                backgroundColor: null,
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `my-accountant-archetype-${window.quizResult.data.name.toLowerCase().replace(/\s/g, '-')}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        } else {
+            // Fallback: generate a simple shareable image using canvas API
+            generateShareImage();
+        }
+    }
+
+    function generateShareImage() {
+        const data = window.quizResult.data;
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 600;
+        canvas.height = 800;
+
+        // Background
+        const grad = ctx.createLinearGradient(0, 0, 600, 800);
+        grad.addColorStop(0, '#F4E0D0');
+        grad.addColorStop(1, '#E8C4A8');
+        ctx.fillStyle = grad;
+        ctx.roundRect(0, 0, 600, 800, 0);
+        ctx.fill();
+
+        // Title
+        ctx.fillStyle = '#8B6F5E';
+        ctx.font = '600 14px "DM Sans", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('YOUR ACCOUNTANT ARCHETYPE', 300, 80);
+
+        // Icon
+        ctx.font = '64px serif';
+        ctx.fillText(data.icon, 300, 220);
+
+        // Archetype name
+        ctx.fillStyle = '#5C4033';
+        ctx.font = '700 36px "Crimson Text", Georgia, serif';
+        ctx.fillText(data.name, 300, 300);
+
+        // Tagline
+        ctx.fillStyle = '#8B6F5E';
+        ctx.font = 'italic 18px "Crimson Text", Georgia, serif';
+        wrapText(ctx, data.tagline, 300, 345, 460, 26);
+
+        // Description
+        ctx.fillStyle = '#5C4033';
+        ctx.font = '15px "DM Sans", sans-serif';
+        wrapText(ctx, data.description, 300, 420, 480, 24);
+
+        // Divider
+        ctx.strokeStyle = '#8B6F5E44';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(250, 640);
+        ctx.lineTo(350, 640);
+        ctx.stroke();
+
+        // Traits
+        ctx.font = '600 13px "DM Sans", sans-serif';
+        ctx.fillStyle = '#8B6F5E';
+        ctx.fillText(`Superpower: ${data.superpower}  ·  Kryptonite: ${data.kryptonite}`, 300, 670);
+
+        // Branding
+        ctx.fillStyle = '#8B6F5E88';
+        ctx.font = '12px "DM Sans", sans-serif';
+        ctx.fillText('aqqrue.com · What Kind of Accountant Are You?', 300, 760);
+
+        // Download
+        const link = document.createElement('a');
+        link.download = `accountant-archetype-${data.name.toLowerCase().replace(/\s/g, '-')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+        const words = text.replace(/"/g, '"').replace(/"/g, '"').split(' ');
+        let line = '';
+        let currentY = y;
+
+        for (const word of words) {
+            const testLine = line + word + ' ';
+            if (ctx.measureText(testLine).width > maxWidth && line !== '') {
+                ctx.fillText(line.trim(), x, currentY);
+                line = word + ' ';
+                currentY += lineHeight;
+            } else {
+                line = testLine;
+            }
+        }
+        ctx.fillText(line.trim(), x, currentY);
+    }
+
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).catch(() => {
+            // Fallback
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+        });
+    }
+
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    // ============ FLOATING NUMBERS ============
+    function createFloatingNumbers() {
+        const container = document.getElementById('floatingNums');
+        const symbols = ['1', '0', '$', '%', '7', '3', '±', '∑', '9', '4', '₹', '£'];
+
+        for (let i = 0; i < 15; i++) {
+            const span = document.createElement('span');
+            span.className = 'float-num';
+            span.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+            span.style.left = Math.random() * 100 + '%';
+            span.style.animationDuration = (12 + Math.random() * 10) + 's';
+            span.style.animationDelay = Math.random() * 15 + 's';
+            span.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+            container.appendChild(span);
+        }
+    }
+
+    // ============ MUSIC ============
+    let musicPlaying = false;
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.3;
+
+    function toggleMusic() {
+        const btn = document.getElementById('musicToggle');
+        if (musicPlaying) {
+            bgMusic.pause();
+            btn.classList.add('muted');
+            musicPlaying = false;
+        } else {
+            bgMusic.play().then(() => {
+                btn.classList.remove('muted');
+                musicPlaying = true;
+            }).catch(() => {});
+        }
+    }
+
+    function startMusic() {
+        if (!musicPlaying) {
+            bgMusic.play().then(() => {
+                document.getElementById('musicToggle').classList.remove('muted');
+                musicPlaying = true;
+            }).catch(() => {});
+        }
+    }
+
+    // ============ KEYBOARD NAVIGATION ============
+    let focusedOption = -1;
+
+    document.addEventListener('keydown', function(e) {
+        const activeScreen = document.querySelector('.screen.active');
+        if (!activeScreen) return;
+
+        // Enter key - universal advance
+        if (e.key === 'Enter') {
+            e.preventDefault();
+
+            if (activeScreen.id === 'landing') {
+                startQuiz();
+                startMusic();
+                return;
+            }
+            if (activeScreen.id === 'intro') {
+                goToQuiz();
+                return;
+            }
+            if (activeScreen.id === 'quiz') {
+                const q = questions[currentQuestion];
+                if (q.type === 'open') {
+                    // Enter in textarea should be newline unless Ctrl/Cmd+Enter
+                    if (e.ctrlKey || e.metaKey) {
+                        const btn = document.getElementById(`btnNext-${currentQuestion}`);
+                        if (btn && btn.classList.contains('visible')) {
+                            nextQuestion();
+                        }
+                    }
+                    return;
+                }
+                // If an option is focused, select it
+                if (focusedOption >= 0) {
+                    selectOption(currentQuestion, focusedOption);
+                    focusedOption = -1;
+                }
+                return;
+            }
+            if (activeScreen.id === 'result') {
+                shareResult();
+                return;
+            }
+        }
+
+        // Number keys 1-4 / A-D for quick option selection
+        if (activeScreen.id === 'quiz') {
+            const q = questions[currentQuestion];
+            if (q.type === 'open') return; // don't intercept typing
+
+            const optCount = q.options.length;
+            let selectedIdx = -1;
+
+            // Number keys
+            if (e.key >= '1' && e.key <= '4') {
+                selectedIdx = parseInt(e.key) - 1;
+            }
+            // Letter keys A-D
+            if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) {
+                selectedIdx = 'abcd'.indexOf(e.key.toLowerCase());
+            }
+
+            if (selectedIdx >= 0 && selectedIdx < optCount) {
+                e.preventDefault();
+                selectOption(currentQuestion, selectedIdx);
+                focusedOption = -1;
+                return;
+            }
+
+            // Arrow keys to navigate options
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                focusedOption = Math.min(focusedOption + 1, optCount - 1);
+                highlightOption(focusedOption);
+                return;
+            }
+            if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                e.preventDefault();
+                focusedOption = Math.max(focusedOption - 1, 0);
+                highlightOption(focusedOption);
+                return;
+            }
+        }
+    });
+
+    function highlightOption(idx) {
+        const options = document.querySelectorAll('.question-card.active .option');
+        options.forEach((el, i) => {
+            el.classList.toggle('focused', i === idx);
+        });
+    }
+
+    // Reset focus when question changes
+    const origRenderQuestion = renderQuestion;
+    renderQuestion = function(index) {
+        focusedOption = -1;
+        origRenderQuestion(index);
+    };
+
+    // ============ INIT ============
+    createFloatingNumbers();
+
+    // Handle URL params for shared results
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('r')) {
+        // Could show a specific result from URL - for future implementation
+    }
+    </script>
+
+    <!-- html2canvas for better screenshots -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+</body>
+</html>
