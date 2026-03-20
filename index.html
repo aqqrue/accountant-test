@@ -900,27 +900,63 @@
 
         /* CTA Section */
         .cta-section {
-            margin-top: 2.5rem;
+            margin-top: 1.5rem;
             text-align: center;
-            padding: 2rem;
-            background: white;
+            padding: 2rem 2rem 1.75rem;
+            background: linear-gradient(135deg, var(--deep-brown) 0%, #6B4A3A 100%);
             border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(92, 64, 51, 0.08);
+            box-shadow: 0 4px 20px rgba(92, 64, 51, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .cta-section h3 {
             font-family: 'Crimson Text', serif;
-            font-size: 1.3rem;
-            color: var(--deep-brown);
+            font-size: 1.4rem;
+            color: var(--cream);
             margin-bottom: 0.5rem;
+            position: relative;
         }
 
         .cta-section p {
             font-family: 'DM Sans', sans-serif;
             font-size: 0.9rem;
-            color: var(--text-light);
+            color: rgba(255, 245, 235, 0.85);
             margin-bottom: 1.25rem;
             line-height: 1.5;
+            position: relative;
+        }
+
+        /* Scroll hint */
+        .scroll-hint {
+            text-align: center;
+            margin-top: 1rem;
+            animation: bounceDown 1.5s ease infinite;
+            color: var(--warm-brown);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-hint p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+
+        @keyframes bounceDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
         }
 
         .cta-form {
@@ -930,21 +966,26 @@
             flex-wrap: wrap;
         }
 
+        .cta-form {
+            position: relative;
+        }
+
         .cta-form input[type="email"] {
             padding: 0.75rem 1.25rem;
             border-radius: 50px;
-            border: 2px solid var(--peach-dark);
+            border: 2px solid rgba(255, 245, 235, 0.3);
             font-family: 'DM Sans', sans-serif;
             font-size: 0.9rem;
             color: var(--deep-brown);
-            background: var(--cream);
+            background: rgba(255, 255, 255, 0.95);
             outline: none;
             min-width: 240px;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .cta-form input[type="email"]:focus {
-            border-color: var(--deep-brown);
+            border-color: var(--cream);
+            box-shadow: 0 0 0 3px rgba(255, 245, 235, 0.2);
         }
 
         .cta-form input[type="email"]::placeholder {
@@ -959,16 +1000,18 @@
             font-size: 0.85rem;
             font-weight: 600;
             cursor: pointer;
-            border: none;
-            background: var(--deep-brown);
-            color: var(--cream);
+            border: 2px solid var(--cream);
+            background: var(--cream);
+            color: var(--deep-brown);
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .cta-form button:hover {
-            background: #4A3228;
+            background: white;
+            border-color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(92, 64, 51, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .cta-form button:disabled {
@@ -980,9 +1023,10 @@
         .cta-success {
             font-family: 'DM Sans', sans-serif;
             font-size: 0.9rem;
-            color: var(--deep-brown);
+            color: var(--cream);
             font-weight: 500;
             display: none;
+            position: relative;
         }
 
         .share-toast {
@@ -1328,6 +1372,12 @@
                 </div>
                 <div class="cta-success" id="ctaSuccess">✨ Thanks! We'll be in touch soon.</div>
             </div>
+        </div>
+
+        <!-- Scroll hint arrow -->
+        <div class="scroll-hint" id="scrollHint">
+            <p>More below</p>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </div>
     </div>
 
@@ -1916,7 +1966,26 @@
         // Store result for sharing
         window.quizResult = { archetype, data, scores };
 
+        // Reset CTA state
+        document.getElementById('ctaForm').style.display = 'flex';
+        document.getElementById('ctaSuccess').style.display = 'none';
+        const hint = document.getElementById('scrollHint');
+        if (hint) hint.style.display = '';
+
         showScreen('result');
+
+        // After a brief pause, smoothly scroll to make CTA visible
+        setTimeout(() => {
+            const cta = document.querySelector('.cta-section');
+            if (cta) {
+                cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            // Hide scroll hint after scrolling
+            setTimeout(() => {
+                if (hint) hint.style.opacity = '0';
+                setTimeout(() => { if (hint) hint.style.display = 'none'; }, 300);
+            }, 2000);
+        }, 1500);
     }
 
     // ============ SHARING ============
