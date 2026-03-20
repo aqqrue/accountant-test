@@ -1171,7 +1171,7 @@
             <div class="progress-bar-container">
                 <div class="progress-info">
                     <span class="progress-section" id="sectionLabel">Part 1 of 3</span>
-                    <span class="progress-count" id="progressCount">1 / 14</span>
+                    <span class="progress-count" id="progressCount">1 / 8</span>
                 </div>
                 <div class="progress-track">
                     <div class="progress-fill" id="progressFill" style="width: 5%"></div>
@@ -1317,15 +1317,7 @@
 
     // ============ DATA ============
     const questions = [
-        // SECTION 1: Forced Choices
-        {
-            section: 1,
-            text: "When you think about the best part of your job, what wins?",
-            options: [
-                { label: "A", text: "When the numbers are exactly right. Chef's kiss.", archetype: "Craft Lover" },
-                { label: "B", text: "When I know my advice actually changed someone's direction.", archetype: "Purpose Seeker" }
-            ]
-        },
+        // SECTION 1: Forced Choice
         {
             section: 1,
             text: "What frustrates you more?",
@@ -1334,23 +1326,7 @@
                 { label: "B", text: "When I know something important but don't have time to act on it.", archetype: "Truth Seeker" }
             ]
         },
-        {
-            section: 1,
-            text: "How do you know you had a good month?",
-            options: [
-                { label: "A", text: "By how smoothly everything ran. No fires, no surprises.", archetype: "Pragmatist" },
-                { label: "B", text: "By whether my clients slept better because of me.", archetype: "Custodian" }
-            ]
-        },
-        {
-            section: 1,
-            text: "What do you want from the tools you use?",
-            options: [
-                { label: "A", text: "Help me do more, faster. Speed is everything.", archetype: "Pragmatist" },
-                { label: "B", text: "Automate the boring parts so I can spend time on the work that needs a human touch.", archetype: "Craft Lover" }
-            ]
-        },
-        // SECTION 2: Scenario Reactions (10-16)
+        // SECTION 2: Scenario Reactions
         {
             section: 2,
             context: "Picture this...",
@@ -1361,18 +1337,6 @@
                 { label: "B", text: "Honestly? I'm proud of how the books turned out. The work speaks for itself.", archetype: "Craft Lover" },
                 { label: "C", text: "Annoyed - but mostly at myself for not having a system that prevents this.", archetype: "Order Bringer" },
                 { label: "D", text: "A quiet kind of tired. Not angry. Just... unseen.", archetype: "Custodian" }
-            ]
-        },
-        {
-            section: 2,
-            context: "You're reviewing a new client's files...",
-            scenario: "You discover a significant tax exposure that their previous accountant missed entirely. What's your first instinct?",
-            text: "What do you do first?",
-            options: [
-                { label: "A", text: "Fix it. Efficiently. Minimize the damage and move on.", archetype: "Pragmatist" },
-                { label: "B", text: "Document exactly what went wrong. Make it airtight.", archetype: "Order Bringer" },
-                { label: "C", text: "Sit the client down. They need to understand what this means.", archetype: "Truth Seeker" },
-                { label: "D", text: "Feel a sense of weight. This is why I do this. This is what the work is really about.", archetype: "Purpose Seeker" }
             ]
         },
         {
@@ -1399,27 +1363,6 @@
         },
         {
             section: 2,
-            text: "Think of your best client relationship. The one you're most proud of. What makes it special?",
-            options: [
-                { label: "A", text: "I've genuinely helped their business grow. That impact matters.", archetype: "Purpose Seeker" },
-                { label: "B", text: "Their books are always clean. The system just works.", archetype: "Order Bringer" },
-                { label: "C", text: "They trust me with everything. I know their business inside and out.", archetype: "Custodian" },
-                { label: "D", text: "I see things in their numbers that others miss. I understand their business at a level they don't.", archetype: "Truth Seeker" }
-            ]
-        },
-        {
-            section: 2,
-            scenario: "It's 11pm during busy season. You're reviewing a return and something doesn't look right. It's probably fine. You could file it and circle back later.",
-            text: "What do you actually do?",
-            options: [
-                { label: "A", text: "Flag it, note it, file it, circle back tomorrow. I have a system for this.", archetype: "Order Bringer" },
-                { label: "B", text: "Stay up. I can't submit something I'm not sure about.", archetype: "Craft Lover" },
-                { label: "C", text: "Stay up. Because if I'm wrong, my client pays the price.", archetype: "Custodian" },
-                { label: "D", text: "Stay up. I need to understand what that number is actually telling me.", archetype: "Truth Seeker" }
-            ]
-        },
-        {
-            section: 2,
             text: "If you could change one thing about how the world sees accountants, what would it be?",
             options: [
                 { label: "A", text: "That we're a cost center. We build the systems that keep businesses alive.", archetype: "Order Bringer" },
@@ -1428,7 +1371,7 @@
                 { label: "D", text: "That we're boring. This work shapes whether businesses survive or fail. That should mean something.", archetype: "Purpose Seeker" }
             ]
         },
-        // SECTION 3: Open Prompts (17-19)
+        // SECTION 3: Open Prompts
         {
             section: 3,
             text: "Complete this sentence:",
