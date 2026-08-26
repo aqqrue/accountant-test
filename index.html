@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What Kind of Accountant Are You? | Aqqrue</title>
-    <meta name="description" content="A 5-minute personality quiz that reveals your accountant archetype. Find out if you're The Guardian, The Decoder, The Architect, or something else entirely.">
-    <meta property="og:title" content="I just found out what kind of accountant I am">
-    <meta property="og:description" content="Take this 2-minute quiz to discover your accountant archetype.">
+    <title>What Kind of Practitioner Are You? | Aqqrue</title>
+    <meta name="description" content="A 2-minute personality quiz for accountants and bookkeepers. Find out if you're The Guardian, The Decoder, The Architect, or something else entirely.">
+    <meta property="og:title" content="I just found out what kind of practitioner I am">
+    <meta property="og:description" content="Take this 2-minute quiz to discover your archetype - for accountants and bookkeepers.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -327,6 +327,83 @@
             font-size: 0.8rem;
             color: var(--text-light);
             opacity: 0.6;
+        }
+
+        /* ============ LEAD CAPTURE ============ */
+        #lead {
+            background: linear-gradient(180deg, var(--sky-light) 0%, var(--peach) 100%);
+            text-align: center;
+        }
+
+        .lead-content {
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .lead-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--deep-brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .lead-subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-bottom: 1.75rem;
+        }
+
+        .lead-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            text-align: left;
+        }
+
+        .lead-form label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--warm-brown);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .lead-form input {
+            padding: 0.9rem 1.15rem;
+            border-radius: 14px;
+            border: 2px solid var(--peach-dark);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            color: var(--deep-brown);
+            background: white;
+            outline: none;
+            width: 100%;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .lead-form input:focus {
+            border-color: var(--warm-brown);
+            box-shadow: 0 0 0 3px rgba(139, 111, 94, 0.15);
+        }
+
+        .lead-form input.invalid {
+            border-color: #c45c4a;
+        }
+
+        .lead-error {
+            font-size: 0.85rem;
+            color: #c45c4a;
+            min-height: 1.2em;
+            text-align: center;
+        }
+
+        .lead-form .btn-start {
+            margin-top: 0.5rem;
+            width: 100%;
         }
 
         /* ============ INTRO SCREEN ============ */
@@ -1375,10 +1452,30 @@
                     <div class="desk"></div>
                 </div>
             </div>
-            <h1 class="landing-title">What Kind of Accountant Are You?</h1>
-            <p class="landing-subtitle">A 2-minute quiz to discover what actually drives you - beyond the spreadsheets.</p>
+            <h1 class="landing-title">What Kind of Practitioner Are You?</h1>
+            <p class="landing-subtitle">A 2-minute quiz for accountants and bookkeepers - to discover what actually drives you, beyond the spreadsheets.</p>
             <button class="btn-start" onclick="startQuiz()">Let's Find Out</button>
-            <p class="landing-footer">Takes about 2 minutes &middot; No sign-up required</p>
+            <p class="landing-footer">Takes about 2 minutes &middot; Name and email required</p>
+        </div>
+    </div>
+
+    <!-- ============ LEAD CAPTURE ============ -->
+    <div class="screen" id="lead">
+        <div class="lead-content">
+            <h2 class="lead-title">Before we start</h2>
+            <p class="lead-subtitle">We'll use this to send you your archetype. Both fields are required.</p>
+            <form class="lead-form" id="leadForm" onsubmit="submitLead(event)">
+                <label>
+                    Name
+                    <input type="text" id="leadName" name="name" autocomplete="name" placeholder="Your name" required>
+                </label>
+                <label>
+                    Email ID
+                    <input type="email" id="leadEmail" name="email" autocomplete="email" placeholder="you@firm.com" required>
+                </label>
+                <p class="lead-error" id="leadError"></p>
+                <button type="submit" class="btn-start">Continue</button>
+            </form>
         </div>
     </div>
 
@@ -1393,11 +1490,11 @@
                 <div class="ledger-line"></div>
             </div>
             <p class="intro-text">
-                Here's the thing about accountants:<br><br>
+                Here's the thing about accountants and bookkeepers:<br><br>
                 Everyone thinks they know what you do.<br>
                 <em>"Oh, taxes. Numbers. Got it."</em><br><br>
                 But the way you actually think about your work?<br>
-                The reason you stay up at 11pm checking that one return?<br><br>
+                The reason you stay up at 11pm checking that one file?<br><br>
                 That's the part nobody asks about.
             </p>
             <p class="intro-text" style="margin-top: 1rem;">
@@ -1443,7 +1540,7 @@
     <div class="screen no-center" id="result">
         <div class="result-card-wrapper">
             <div class="result-card" id="resultCard">
-                <div class="result-label">Your Accountant Archetype</div>
+                <div class="result-label">Your Practitioner Archetype</div>
                 <div class="result-name-line" id="resultNameLine"></div>
                 <div class="result-icon" id="resultIcon"></div>
                 <h2 class="result-archetype" id="resultArchetype"></h2>
@@ -1451,11 +1548,11 @@
                 <div class="result-divider"></div>
                 <p class="result-description" id="resultDescription"></p>
                 <div class="result-traits" id="resultTraits"></div>
-                <div class="result-branding">whoareyou.aqqrue.com &middot; What Kind of Accountant Are You?</div>
+                <div class="result-branding">whoareyou.aqqrue.com &middot; What Kind of Practitioner Are You?</div>
             </div>
 
             <div class="share-section">
-                <p class="share-title">Think your accountant friends can guess theirs?</p>
+                <p class="share-title">Think your accountant and bookkeeper friends can guess theirs?</p>
                 <div class="share-buttons">
                     <button class="btn-share primary" onclick="shareResult()">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
@@ -1465,23 +1562,12 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                         Copy Link
                     </button>
-                    <button class="btn-share" onclick="downloadCard()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Save Image
+                    <button class="btn-share" id="emailMeBtn" onclick="emailResults()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        Email me
                     </button>
                 </div>
                 <button class="btn-retake" onclick="retakeQuiz()">Take it again</button>
-            </div>
-
-            <!-- CTA Email Section -->
-            <div class="cta-section">
-                <h3>Liked the quiz? 🎯</h3>
-                <p>We're building something special for accountants and would love to learn more about you.</p>
-                <div class="cta-form" id="ctaForm">
-                    <input type="email" id="ctaEmail" placeholder="Enter your email" required />
-                    <button onclick="submitCtaEmail()">I'm in!</button>
-                </div>
-                <div class="cta-success" id="ctaSuccess">✨ Thanks! We'll be in touch soon.</div>
             </div>
 
             <!-- Aggregate Results Section -->
@@ -1515,8 +1601,8 @@
     2. Name the first sheet "Responses"
     3. Add these headers in Row 1:
        A: sessionId | B: timestamp | C: ip | D: country | E: city
-       F: userAgent | G: questionIndex | H: questionText
-       I: selectedOption | J: archetype | K: finalResult
+       F: userAgent | G: questionIndex | H: questionText (name on lead/complete)
+       I: selectedOption (email on lead/complete) | J: archetype | K: finalResult
        L: completionStatus | M: scoreBreakdown
 
     4. Go to Extensions > Apps Script
@@ -1531,6 +1617,15 @@
            data.questionText, data.selectedOption, data.archetype,
            data.finalResult, data.completionStatus, data.scoreBreakdown
          ]);
+         if (data.completionStatus === 'email_request' && data.selectedOption) {
+           MailApp.sendEmail({
+             to: data.selectedOption,
+             subject: 'Your practitioner archetype: ' + (data.finalResult || ''),
+             body: 'Hi ' + (data.questionText || 'there') + ',\n\n' +
+               (data.scoreBreakdown || 'Your quiz results are in.') +
+               '\n\nhttps://survey.aqqrue.ai'
+           });
+         }
          return ContentService.createTextOutput("OK");
        }
 
@@ -1548,6 +1643,9 @@
     // ============ LOGGING ============
     const sessionId = crypto.randomUUID ? crypto.randomUUID() : 'sess-' + Math.random().toString(36).substr(2, 9) + '-' + Date.now();
     let geoData = { ip: '', country: '', city: '' };
+    let userName = '';
+    let userEmail = '';
+    let emailedResults = false;
 
     // Fetch IP + geolocation once on load
     (async function fetchGeo() {
@@ -1576,6 +1674,8 @@
             finalResult: '',
             completionStatus: 'partial',
             scoreBreakdown: '',
+            name: userName,
+            email: userEmail,
             ...payload
         };
         // Fire-and-forget - don't block the quiz
@@ -1621,7 +1721,7 @@
         },
         {
             section: 2,
-            scenario: "A shiny new AI tool launches and promises to \"replace the need for accountants.\" Your reaction?",
+            scenario: "A shiny new AI tool launches and promises to \"replace the need for accountants and bookkeepers.\" Your reaction?",
             text: "Honestly, what do you think?",
             options: [
                 { label: "A", text: "Good luck with that. I'll believe it when I see it.", archetype: "Pragmatist" },
@@ -1632,7 +1732,7 @@
         },
         {
             section: 2,
-            scenario: "Dinner party. Someone asks what you do. You say \"accountant.\" They visibly lose interest or crack a boring joke.",
+            scenario: "Dinner party. Someone asks what you do. You say \"accountant\" or \"bookkeeper.\" They visibly lose interest or crack a boring joke.",
             text: "How does that land?",
             options: [
                 { label: "A", text: "Laugh it off. I don't need their validation.", archetype: "Pragmatist" },
@@ -1653,7 +1753,7 @@
         },
         {
             section: 2,
-            text: "If you could change one thing about how the world sees accountants, what would it be?",
+            text: "If you could change one thing about how the world sees accountants and bookkeepers, what would it be?",
             options: [
                 { label: "A", text: "That we're a cost center. We build the systems that keep businesses alive.", archetype: "Order Bringer" },
                 { label: "B", text: "That we're just \"numbers people.\" We understand business better than most.", archetype: "Truth Seeker" },
@@ -1665,7 +1765,7 @@
         {
             section: 3,
             text: "Complete this sentence:",
-            context: "\"People don't realize that being an accountant means...\"",
+            context: "\"People don't realize that being an accountant or bookkeeper means...\"",
             type: "open",
             placeholder: "Say whatever comes to mind..."
         },
@@ -1678,7 +1778,7 @@
         },
         {
             section: 3,
-            text: "If you could go back and talk to yourself on the day you decided to become an accountant, what would you say?",
+            text: "If you could go back and talk to yourself on the day you decided to become an accountant or bookkeeper, what would you say?",
             context: "No filter. Just you talking to younger you.",
             type: "open",
             placeholder: "What would you tell them..."
@@ -1692,13 +1792,13 @@
             tagline: "\"You hold the line so others don't have to.\"",
             color: "#7BA87C",
             bg: "linear-gradient(160deg, #E8F2E5, #D0E4CC)",
-            description: "You carry more than numbers - you carry people's trust, their livelihoods, their peace of mind. You're the accountant who stays up late not for the billable hour, but because someone is counting on you. Most of them will never know the half of what you've caught.",
+            description: "You carry more than numbers - you carry people's trust, their livelihoods, their peace of mind. You're the practitioner who stays up late not for the billable hour, but because someone is counting on you. Most of them will never know the half of what you've caught.",
             superpower: "Trust",
             kryptonite: "Invisibility",
             motto: "\"If not me, then who?\"",
             studyBuddy: "The Decoder",
             focusSpot: "A quiet corner with a client's full file",
-            shareText: "So I took this quiz and apparently I'm The Guardian \u2014 the accountant who quietly carries everyone's financial safety and somehow never gets a thank-you for it.\n\nMy superpower is trust. My kryptonite? Being completely invisible while doing it. Painfully accurate.\n\nThere are 6 accountant archetypes. I bet you can't guess yours:"
+            shareText: "So I took this quiz and apparently I'm The Guardian \u2014 the practitioner who quietly carries everyone's financial safety and somehow never gets a thank-you for it.\n\nMy superpower is trust. My kryptonite? Being completely invisible while doing it. Painfully accurate.\n\nThere are 6 archetypes for accountants and bookkeepers. I bet you can't guess yours:"
         },
         "Truth Seeker": {
             name: "The Decoder",
@@ -1712,7 +1812,7 @@
             motto: "\"The answer is in the data.\"",
             studyBuddy: "The Artisan",
             focusSpot: "Deep in a complex reconciliation",
-            shareText: "Apparently I'm The Decoder \u2014 the accountant who won't stop digging until the numbers tell the real story. Not the convenient one. The true one.\n\nMy kryptonite is literally \"not enough hours.\" If that isn't the most accountant thing you've ever heard.\n\nThere are 6 types. Which one are you?"
+            shareText: "Apparently I'm The Decoder \u2014 the practitioner who won't stop digging until the numbers tell the real story. Not the convenient one. The true one.\n\nMy kryptonite is literally \"not enough hours.\" If that isn't the most on-the-nose thing you've ever heard.\n\nThere are 6 types. Which one are you?"
         },
         "Order Bringer": {
             name: "The Architect",
@@ -1726,7 +1826,7 @@
             motto: "\"A place for everything.\"",
             studyBuddy: "The Engine",
             focusSpot: "A perfectly organized workspace",
-            shareText: "Just found out I'm The Architect \u2014 the accountant who genuinely believes chaos is a personal choice and clean workflows are an art form.\n\nMy kryptonite? Other people's chaos. (Yes, I'm looking at you and your shoebox of receipts.)\n\n6 accountant archetypes exist. I dare you to take this and not feel seen:"
+            shareText: "Just found out I'm The Architect \u2014 the practitioner who genuinely believes chaos is a personal choice and clean workflows are an art form.\n\nMy kryptonite? Other people's chaos. (Yes, I'm looking at you and your shoebox of receipts.)\n\n6 archetypes for accountants and bookkeepers. I dare you to take this and not feel seen:"
         },
         "Pragmatist": {
             name: "The Engine",
@@ -1734,13 +1834,13 @@
             tagline: "\"Get it done. Get it done right. Move on.\"",
             color: "#D4A853",
             bg: "linear-gradient(160deg, #FBF0DB, #F2E3C3)",
-            description: "You're the accountant who gets things done. Efficiency isn't just a nice-to-have - it's how you create value. You measure in output, you think in systems, and you know that time is the most expensive thing your clients pay for.",
+            description: "You're the practitioner who gets things done. Efficiency isn't just a nice-to-have - it's how you create value. You measure in output, you think in systems, and you know that time is the most expensive thing your clients pay for.",
             superpower: "Efficiency",
             kryptonite: "Slow processes",
             motto: "\"Time is money. Literally.\"",
             studyBuddy: "The Architect",
             focusSpot: "Dual monitors, zero distractions",
-            shareText: "I'm The Engine \u2014 the accountant who considers slow processes a personal offense and measures a good month by how much got done.\n\nMy inner motto is literally \"Time is money. Literally.\" I've never felt so called out by a quiz.\n\nThere are 6 accountant archetypes and this thing is weirdly accurate:"
+            shareText: "I'm The Engine \u2014 the practitioner who considers slow processes a personal offense and measures a good month by how much got done.\n\nMy inner motto is literally \"Time is money. Literally.\" I've never felt so called out by a quiz.\n\nThere are 6 archetypes for accountants and bookkeepers and this thing is weirdly accurate:"
         },
         "Purpose Seeker": {
             name: "The Compass",
@@ -1748,13 +1848,13 @@
             tagline: "\"There has to be more to this than filing returns.\"",
             color: "#9B7BB5",
             bg: "linear-gradient(160deg, #EDE4F3, #DED2EB)",
-            description: "You got into this profession because it meant something. And part of you still holds onto that - the idea that accounting isn't just a service, it's stewardship. You're looking for the version of this work that feels like it matters.",
+            description: "You got into this profession because it meant something. And part of you still holds onto that - the idea that this work isn't just a service, it's stewardship. You're looking for the version of this work that feels like it matters.",
             superpower: "Meaning",
             kryptonite: "Routine without purpose",
             motto: "\"This should matter more.\"",
             studyBuddy: "The Guardian",
             focusSpot: "Advising a business that genuinely needs you",
-            shareText: "Turns out I'm The Compass \u2014 the accountant who got into this because it meant something and still hasn't let go of that feeling.\n\nMy kryptonite is \"routine without purpose\" and honestly, that hit different during busy season.\n\n6 accountant archetypes. This quiz knows things it shouldn't:"
+            shareText: "Turns out I'm The Compass \u2014 the practitioner who got into this because it meant something and still hasn't let go of that feeling.\n\nMy kryptonite is \"routine without purpose\" and honestly, that hit different during busy season.\n\n6 archetypes for accountants and bookkeepers. This quiz knows things it shouldn't:"
         },
         "Craft Lover": {
             name: "The Artisan",
@@ -1762,20 +1862,19 @@
             tagline: "\"There's an elegance to getting it exactly right.\"",
             color: "#C47A7A",
             bg: "linear-gradient(160deg, #F5E0E0, #EBCECE)",
-            description: "For you, accounting isn't just work - it's craft. A perfectly balanced sheet, an elegant tax strategy, a clean close - these things satisfy you on a level most people wouldn't understand. You take pride in precision, not because you have to, but because you can't help it.",
+            description: "For you, this work isn't just a job - it's craft. A perfectly balanced sheet, an elegant tax strategy, a clean close - these things satisfy you on a level most people wouldn't understand. You take pride in precision, not because you have to, but because you can't help it.",
             superpower: "Precision",
             kryptonite: "\"Good enough\"",
             motto: "\"If it's worth doing, it's worth doing right.\"",
             studyBuddy: "The Decoder",
             focusSpot: "A complex problem with an elegant solution",
-            shareText: "I'm The Artisan \u2014 the accountant who finds a perfectly balanced sheet genuinely beautiful and considers \"good enough\" a four-letter word.\n\nApparently my superpower is precision and my kryptonite is people who round. You know who you are.\n\n6 accountant archetypes. Find yours (if you dare):"
+            shareText: "I'm The Artisan \u2014 the practitioner who finds a perfectly balanced sheet genuinely beautiful and considers \"good enough\" a four-letter word.\n\nApparently my superpower is precision and my kryptonite is people who round. You know who you are.\n\n6 archetypes for accountants and bookkeepers. Find yours (if you dare):"
         }
     };
 
     // ============ STATE ============
     let currentQuestion = 0;
     let answers = {};
-    let userName = '';
 
     // ============ NAVIGATION ============
     function showScreen(id) {
@@ -1791,8 +1890,51 @@
     }
 
     function startQuiz() {
-        showScreen('intro');
+        showScreen('lead');
         startMusic();
+        setTimeout(() => {
+            const nameInput = document.getElementById('leadName');
+            if (nameInput) nameInput.focus();
+        }, 300);
+    }
+
+    function submitLead(e) {
+        if (e) e.preventDefault();
+        const nameInput = document.getElementById('leadName');
+        const emailInput = document.getElementById('leadEmail');
+        const errorEl = document.getElementById('leadError');
+        const name = (nameInput.value || '').trim();
+        const email = (emailInput.value || '').trim();
+        const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        nameInput.classList.toggle('invalid', !name);
+        emailInput.classList.toggle('invalid', !emailOk);
+
+        if (!name && !emailOk) {
+            errorEl.textContent = 'Name and email are required.';
+            return;
+        }
+        if (!name) {
+            errorEl.textContent = 'Please enter your name.';
+            nameInput.focus();
+            return;
+        }
+        if (!emailOk) {
+            errorEl.textContent = 'Please enter a valid email ID.';
+            emailInput.focus();
+            return;
+        }
+
+        errorEl.textContent = '';
+        userName = name;
+        userEmail = email;
+        logToSheet({
+            questionIndex: 'lead',
+            questionText: userName,
+            selectedOption: userEmail,
+            completionStatus: 'lead_captured'
+        });
+        showScreen('intro');
     }
 
     function goToQuiz() {
@@ -1803,56 +1945,69 @@
     function retakeQuiz() {
         currentQuestion = 0;
         answers = {};
+        userName = '';
+        userEmail = '';
+        emailedResults = false;
+        const nameInput = document.getElementById('leadName');
+        const emailInput = document.getElementById('leadEmail');
+        const errorEl = document.getElementById('leadError');
+        if (nameInput) { nameInput.value = ''; nameInput.classList.remove('invalid'); }
+        if (emailInput) { emailInput.value = ''; emailInput.classList.remove('invalid'); }
+        if (errorEl) errorEl.textContent = '';
+        resetEmailMeButton();
         showScreen('landing');
     }
 
-    // ============ CTA EMAIL ============
-    function submitCtaEmail() {
-        const emailInput = document.getElementById('ctaEmail');
-        const email = emailInput.value.trim();
-        if (!email || !email.includes('@')) {
-            emailInput.style.borderColor = '#e74c3c';
-            setTimeout(() => emailInput.style.borderColor = '', 1500);
+    function resetEmailMeButton() {
+        const btn = document.getElementById('emailMeBtn');
+        if (!btn) return;
+        btn.disabled = false;
+        btn.classList.remove('primary');
+        btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email me`;
+    }
+
+    function emailResults() {
+        if (!window.quizResult) return;
+        if (!userEmail) {
+            showToast('Add your email at the start to receive results.');
             return;
         }
-        const btn = document.querySelector('.cta-form button');
-        btn.disabled = true;
-        btn.textContent = 'Sending...';
-        // Log email to Google Sheet
-        if (SHEET_WEBHOOK_URL) {
-            fetch(SHEET_WEBHOOK_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    sessionId: sessionId,
-                    timestamp: new Date().toISOString(),
-                    ip: geoData.ip,
-                    country: geoData.country,
-                    city: geoData.city,
-                    userAgent: navigator.userAgent,
-                    questionIndex: 'cta_email',
-                    questionText: 'CTA Email Signup',
-                    selectedOption: email,
-                    archetype: '',
-                    finalResult: '',
-                    completionStatus: 'email_signup',
-                    scoreBreakdown: ''
-                })
-            }).catch(() => {});
+        const data = window.quizResult.data;
+        const btn = document.getElementById('emailMeBtn');
+        if (emailedResults) {
+            showToast('Results already queued for ' + userEmail);
+            return;
         }
-        document.getElementById('ctaForm').style.display = 'none';
-        document.getElementById('ctaSuccess').style.display = 'block';
+        if (btn) {
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+        }
+        logToSheet({
+            questionIndex: 'email_me',
+            questionText: userName,
+            selectedOption: userEmail,
+            archetype: window.quizResult.archetype,
+            finalResult: data.name + ' (' + window.quizResult.archetype + ')',
+            completionStatus: 'email_request',
+            scoreBreakdown: data.shareText
+        });
+        emailedResults = true;
+        if (btn) {
+            btn.disabled = false;
+            btn.classList.add('primary');
+            btn.textContent = 'Sent to ' + userEmail;
+        }
+        showToast("We'll email your results to " + userEmail);
     }
 
     // ============ AGGREGATE RESULTS ============
     const SEED_COUNTS = {
-        "The Guardian": 152,
-        "The Decoder": 361,
-        "The Architect": 294,
-        "The Engine": 475,
-        "The Compass": 52,
-        "The Artisan": 61
+        "The Guardian": 1117,
+        "The Decoder": 2652,
+        "The Architect": 2160,
+        "The Engine": 3489,
+        "The Compass": 382,
+        "The Artisan": 448
     };
 
     const archetypeColors = {
@@ -1866,8 +2021,13 @@
 
     function getAggregateCounts() {
         const stored = localStorage.getItem('quizAggregateCounts');
-        if (stored) return JSON.parse(stored);
-        // First visit — seed with starting balances
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                const total = Object.values(parsed).reduce((a, b) => a + (Number(b) || 0), 0);
+                if (total >= 10000) return parsed;
+            } catch (e) { /* fall through to seed */ }
+        }
         localStorage.setItem('quizAggregateCounts', JSON.stringify(SEED_COUNTS));
         return { ...SEED_COUNTS };
     }
@@ -1898,7 +2058,7 @@
         const countEl = document.getElementById('aggregateCount');
         const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
-        countEl.textContent = `${total.toLocaleString()} accountants have taken the quiz`;
+        countEl.textContent = `${total.toLocaleString()} accountants and bookkeepers have taken the quiz`;
 
         const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
         const maxCount = sorted[0][1];
@@ -2063,7 +2223,7 @@
 
         const messages = [
             "Analyzing your responses...",
-            "Cross-referencing with 6 accountant archetypes...",
+            "Cross-referencing with 6 practitioner archetypes...",
             "Consulting the ledger of souls...",
             "Almost there...",
         ];
@@ -2096,15 +2256,18 @@
             "Craft Lover": 0
         };
 
-        // Score multiple-choice questions
-        for (let i = 0; i < 17; i++) {
+        // Score multiple-choice questions (was hardcoded to 0-16 / 17-19
+        // from an older 20-question version, so open prompts never counted)
+        questions.forEach((q, i) => {
+            if (q.type === 'open') return;
             if (answers[i] && answers[i].archetype) {
                 scores[answers[i].archetype] += 1;
             }
-        }
+        });
 
         // Analyze open prompts for keywords
-        for (let i = 17; i < 20; i++) {
+        questions.forEach((q, i) => {
+            if (q.type !== 'open') return;
             if (answers[i] && answers[i].text) {
                 const text = answers[i].text.toLowerCase();
 
@@ -2121,7 +2284,7 @@
                 // Craft Lover signals
                 if (/right|perfect|precise|exact|elegant|craft|pride|quality|skill/.test(text)) scores["Craft Lover"] += 1.5;
             }
-        }
+        });
 
         // Find the winner
         let maxScore = 0;
@@ -2135,6 +2298,9 @@
 
         // Log final result
         logToSheet({
+            questionIndex: 'complete',
+            questionText: userName,
+            selectedOption: userEmail,
             finalResult: archetypeData[winner].name + ' (' + winner + ')',
             completionStatus: 'complete',
             scoreBreakdown: Object.entries(scores).map(([k, v]) => k + ':' + v).join(' | ')
@@ -2149,7 +2315,7 @@
 
         // Apply archetype-specific gradient to card
         document.getElementById('resultCard').style.background = data.bg;
-        document.getElementById('resultNameLine').textContent = '';
+        document.getElementById('resultNameLine').textContent = userName ? userName : '';
         document.getElementById('resultIcon').innerHTML = `<span>${data.icon}</span>`;
         document.getElementById('resultIcon').style.background = `${data.color}22`;
         document.getElementById('resultArchetype').textContent = data.name;
@@ -2181,24 +2347,25 @@
         // Increment aggregate count
         incrementCount(data.name);
 
-        // Reset CTA + aggregate state
-        document.getElementById('ctaForm').style.display = 'flex';
-        document.getElementById('ctaSuccess').style.display = 'none';
+        emailedResults = false;
+        resetEmailMeButton();
+
         document.getElementById('aggregateSection').style.display = 'block';
         document.getElementById('aggregateChart').style.display = 'none';
         document.getElementById('aggregateToggle').querySelector('span').textContent = 'See aggregate results here';
         const hint = document.getElementById('scrollHint');
-        if (hint) hint.style.display = '';
+        if (hint) {
+            hint.style.display = '';
+            hint.style.opacity = '';
+        }
 
         showScreen('result');
 
-        // After a brief pause, smoothly scroll to make CTA visible
         setTimeout(() => {
-            const cta = document.querySelector('.cta-section');
-            if (cta) {
-                cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            const share = document.querySelector('.share-section');
+            if (share) {
+                share.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-            // Hide scroll hint after scrolling
             setTimeout(() => {
                 if (hint) hint.style.opacity = '0';
                 setTimeout(() => { if (hint) hint.style.display = 'none'; }, 300);
@@ -2242,7 +2409,7 @@
                 useCORS: true
             }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = `my-accountant-archetype-${window.quizResult.data.name.toLowerCase().replace(/\s/g, '-')}.png`;
+                link.download = `my-practitioner-archetype-${window.quizResult.data.name.toLowerCase().replace(/\s/g, '-')}.png`;
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
@@ -2271,7 +2438,7 @@
         ctx.fillStyle = '#8B6F5E';
         ctx.font = '600 14px "DM Sans", sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('YOUR ACCOUNTANT ARCHETYPE', 300, 80);
+        ctx.fillText('YOUR PRACTITIONER ARCHETYPE', 300, 80);
 
         // Icon
         ctx.font = '64px serif';
@@ -2308,11 +2475,11 @@
         // Branding
         ctx.fillStyle = '#8B6F5E88';
         ctx.font = '12px "DM Sans", sans-serif';
-        ctx.fillText('whoareyou.aqqrue.com · What Kind of Accountant Are You?', 300, 760);
+        ctx.fillText('whoareyou.aqqrue.com · What Kind of Practitioner Are You?', 300, 760);
 
         // Download
         const link = document.createElement('a');
-        link.download = `accountant-archetype-${data.name.toLowerCase().replace(/\s/g, '-')}.png`;
+        link.download = `practitioner-archetype-${data.name.toLowerCase().replace(/\s/g, '-')}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
     }
@@ -2413,6 +2580,10 @@
             if (activeScreen.id === 'landing') {
                 startQuiz();
                 startMusic();
+                return;
+            }
+            if (activeScreen.id === 'lead') {
+                submitLead();
                 return;
             }
             if (activeScreen.id === 'intro') {
